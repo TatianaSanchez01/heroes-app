@@ -1,0 +1,46 @@
+<div class="grid" *ngIf="hero; else divLoading">
+  <mat-card class="col-12 px-2 py-3 sm:col-6 md:p-5">
+    <mat-card-header>
+      <mat-card-title class="text-2xl">{{ hero.alter_ego }}</mat-card-title>
+      <mat-card-subtitle class="text-normal my-3">
+        {{ hero.superhero }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="flex flex-column">
+      <mat-chip-listbox class="">
+        <mat-chip *ngFor="let name of hero.characters.split(',')">
+          {{ name }}
+        </mat-chip>
+      </mat-chip-listbox>
+      <div class="flex flex-column my-4">
+        <h2>Hero Data:</h2>
+        <mat-list>
+          <mat-list-item
+            ><strong>First Appearance</strong>
+            {{ hero.first_appearance }}</mat-list-item
+          >
+          <mat-list-item
+            ><strong>Publisher: </strong>{{ hero.publisher }}</mat-list-item
+          >
+        </mat-list>
+        <button mat-button color="warn" (click)="goBack()">Regresar</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+    <img
+      [src]="hero | heroImagePipe"
+      [alt]="hero.superhero"
+      class="border-round-xl"
+    />
+  </mat-card>
+</div>
+
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
